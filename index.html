@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>木心模联SE抽奖器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fffde7; /* 淡黄色背景 */
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 抽奖容器 */
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        /* 祝贺特效 */
+        @keyframes congratulation {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* 抽奖结果标签样式 */
+        h2#resultLabel {
+            font-size: 24px;
+            text-align: center;
+            margin-top: 30px;
+            padding: 10px;
+            background-color: #ffd54f;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 抽奖按钮样式 */
+        #startButton {
+            display: block;
+            width: 100%;
+            max-width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #2196f3;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 恭喜信息样式 */
+        #congratulationMessage {
+            text-align: center;
+            font-size: 18px;
+            color: #ff0000;
+            display: none; /* 默认隐藏 */
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 添加logo图片 -->
+        <img id="logo" src="logo.jpg" alt="Logo">
+
+        <h1 style="text-align: center;">开始抽奖啦!</h1>
+        <button id="startButton" onclick="startLuckyDraw()">开始抽奖</button>
+        <h2 id="resultLabel"></h2>
+
+        <!-- 添加恭喜信息 -->
+        <p id="congratulationMessage">恭喜！</p>
+    </div>
+
+    <!-- JavaScript代码 -->
+    <script>
+        var congratulationMessage = document.getElementById("congratulationMessage");
+        var isCongratulating = false; // 表示是否正在进行恭喜特效
+
+        function startLuckyDraw() {
+            if (isCongratulating) return; // 防止重复点击
+
+            var candidates = ["王艺辉", "刘开心", "刘不开心", "刘恺欣", "刘伤心"]; // 候选人名单
+            var resultLabel = document.getElementById("resultLabel");
+            var count = 0;
+
+            var flashingInterval = setInterval(function() {
+                resultLabel.textContent = candidates[Math.floor(Math.random() * candidates.length)];
+                count++;
+
+                if (count == 20) {
+                    clearInterval(flashingInterval);
+
+                    // 在抽奖结束后添加祝贺特效
+                    resultLabel.style.animation = "congratulation 1s";
+                    congratulationMessage.style.display = "block"; // 显示恭喜信息
+                    isCongratulating = true;
+
+                    setTimeout(function() {
+                        resultLabel.style.animation = ""; // 祝贺特效结束后移除动画效果
+                        congratulationMessage.style.display = "none"; // 隐藏恭喜信息
+                        isCongratulating = false;
+                    }, 1000);
+                }
+            }, 100);
+        }
+    </script>
+</body>
+</html>
