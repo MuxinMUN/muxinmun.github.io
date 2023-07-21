@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>抽奖</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -12,8 +13,8 @@
 
         /* 抽奖容器 */
         .container {
-            max-width: 1500px;
-            margin: 50px auto;
+            max-width: 100%;
+            margin: 20px;
             padding: 20px;
             background-color: #fff;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -63,12 +64,34 @@
             display: none; /* 默认隐藏 */
             margin-top: 10px;
         }
+
+        /* Responsiveness for mobile devices */
+        @media only screen and (max-width: 600px) {
+            .container {
+                margin: 10px;
+                padding: 10px;
+            }
+
+            #startButton {
+                font-size: 20px;
+            }
+
+            h2#resultLabel {
+                font-size: 20px;
+                margin-top: 20px;
+                padding: 5px;
+            }
+
+            #congratulationMessage {
+                font-size: 24px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <!-- 添加logo图片 -->
-        <img id="logo" src="logo.jpg" alt="Logo" width="100">
+        <img id="logo" src="logo.jpg" alt="Logo" width="300">
 
         <h1 style="text-align: center;">木心抽奖</h1>
         <button id="startButton" onclick="startLuckyDraw()">开始抽奖</button>
